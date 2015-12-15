@@ -4,12 +4,13 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
+import java.time.Instant;
 import java.util.Properties;
 
 /**
  * Created by edgar on 15-12-11.
  */
-public class ProducerExample {
+public class DelayProducerExample {
 
   public static void main(String[] args) {
     Properties props = new Properties();
@@ -60,9 +61,9 @@ public class ProducerExample {
     Producer<String, String> producer = new KafkaProducer(props);
     for (int i = 100; i < 200; i++) {
       System.out.println(i);
-      producer.send(new ProducerRecord<String, String>("my-topic5", Integer.toString(i), "haha." +
-                                                                                         Integer.toString(
-                                                                                                 i)));
+      long delay = Instant.now().getEpochSecond() + 5;
+      producer.send(new ProducerRecord<String, String>("delay-topic5", Integer.toString(i),
+                                                       String.valueOf(delay)));
 
     }
 

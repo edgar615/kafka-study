@@ -1,0 +1,1 @@
+连接服务器上的kafka，需要修改 advertised.host.name属性为服务器地址

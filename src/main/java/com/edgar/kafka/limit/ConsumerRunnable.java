@@ -51,6 +51,9 @@ public class ConsumerRunnable implements Runnable {
     props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
     props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
     props.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,false);
+    //earliest: automatically reset the offset to the earliest offset
+    //latest: automatically reset the offset to the latest offset
+    //none: throw exception to the consumer if no previous offset is found for the consumer's group
     props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
 
     final KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(props);

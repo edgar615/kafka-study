@@ -1,9 +1,11 @@
 package com.edgar.kafka.simple;
 
+import org.apache.kafka.clients.consumer.CommitFailedException;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
+import org.apache.kafka.common.errors.WakeupException;
 
 import java.util.Arrays;
 import java.util.Properties;
@@ -11,7 +13,7 @@ import java.util.Properties;
 /**
  * Created by edgar on 16-4-19.
  */
-public class ConsumerRunnable implements Runnable {
+public class ConsumerRunnable2 implements Runnable {
 
   private String kafkaConnect;
 
@@ -62,8 +64,17 @@ public class ConsumerRunnable implements Runnable {
           System.out.printf("partition:%d, key:%s, offset:%d\n", record.partition(), record.key(),
                             record.offset());
         }
-        kafkaConsumer.commitAsync();
+        try {
+          kafkaConsumer.commitAsync();
+        } catch (CommitFailedException e) {
+          e.printStackTrace();
+        }
       }
+    } catch (WakeupException e) {
+//      . Instead of setting the flag in the previous example, the thread triggering the shutdown
+// can then call consumer.wakeup() to interrupt an active poll, causing it to throw a
+// WakeupException. This API is safe to use from another thread
+      // ignore for shutdown
     } finally {
       kafkaConsumer.close();
     }

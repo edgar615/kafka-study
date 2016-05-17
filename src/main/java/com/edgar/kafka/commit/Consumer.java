@@ -1,5 +1,4 @@
-package com.edgar.kafka.partition;
-
+package com.edgar.kafka.commit;
 
 
 /**
@@ -7,11 +6,11 @@ package com.edgar.kafka.partition;
  */
 public class Consumer {
   public static void main(String[] args) {
-    ConsumerRunnable runnable = new ConsumerRunnable();
+    CommitOffsetRunnable runnable = new CommitOffsetRunnable();
     runnable.setClientId("simple");
     runnable.setGroupId("test");
     runnable.setKafkaConnect("10.4.7.48:9092");
-    runnable.setTopicName("topic-6");
+    runnable.setTopicName("test-1");
     new Thread(runnable).start();
   }
 }

@@ -43,7 +43,7 @@ public class ConsumerRunnable implements Runnable {
     props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaConnect);
     props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
 //    props.put(ConsumerConfig.CLIENT_ID_CONFIG, clientId);
-    props.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "org.apache.kafka.clients.consumer.RoundRobinAssignor");
+//    props.put(ConsumerConfig.PARTITION_ASSIGNMENT_STRATEGY_CONFIG, "org.apache.kafka.clients.consumer.RoundRobinAssignor");
     props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
     props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
     KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(props);

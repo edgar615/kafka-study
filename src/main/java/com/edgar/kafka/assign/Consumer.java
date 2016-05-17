@@ -1,5 +1,4 @@
-package com.edgar.kafka.partition;
-
+package com.edgar.kafka.assign;
 
 
 /**
@@ -7,7 +6,7 @@ package com.edgar.kafka.partition;
  */
 public class Consumer {
   public static void main(String[] args) {
-    ConsumerRunnable runnable = new ConsumerRunnable();
+    CommitAssignRunnable runnable = new CommitAssignRunnable();
     runnable.setClientId("simple");
     runnable.setGroupId("test");
     runnable.setKafkaConnect("10.4.7.48:9092");

@@ -17,7 +17,7 @@ public class Producer {
     props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
 
     System.out.println(CountryPartitioner.class.getCanonicalName());
-    props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, SimplePartitioner.class.getCanonicalName());
+    props.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, CountryPartitioner.class.getCanonicalName());
 
     props.put("partitions.0","USA");
     props.put("partitions.1","India");

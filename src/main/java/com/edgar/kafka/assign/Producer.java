@@ -21,7 +21,7 @@ public class Producer {
 
     KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
     for (int i = 0; i < 10; i++) {
-      producer.send(new ProducerRecord<String, String>("test-1", "producer" + i),
+      producer.send(new ProducerRecord<String, String>("test", "producer" + i),
               new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata metadata, Exception exception) {

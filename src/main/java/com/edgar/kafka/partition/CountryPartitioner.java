@@ -17,6 +17,7 @@ public class CountryPartitioner implements Partitioner {
   @Override
   public int partition(String topic, Object key, byte[] keyBytes, Object value, byte[] valueBytes, Cluster cluster) {
     List<PartitionInfo> partitions = cluster.availablePartitionsForTopic(topic);
+    System.out.println(partitions.size());
     String valueStr = (String)value;
     String countryName = ((String) value).split(":")[0];
     if(countryToPartitionMap.containsKey(countryName)){

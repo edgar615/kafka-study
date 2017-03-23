@@ -1,6 +1,10 @@
-package com.edgar.kafka.limit;
+package com.edgar.kafka.pause;
 
-import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
+import org.apache.kafka.clients.consumer.ConsumerRebalanceListener;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.apache.kafka.clients.consumer.ConsumerRecords;
+import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.TopicPartition;
 
 import java.util.Arrays;
@@ -89,9 +93,19 @@ public class ConsumerRunnable implements Runnable {
     try {
       while (true) {
         ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
+        System.out.println("poll");
+        TopicPartition topicPartition = new TopicPartition("test-ihorn-hanf", 0);
+        kafkaConsumer.pause(topicPartition);
+//        int i = 0;
         for (ConsumerRecord<String, String> record : records) {
           System.out.printf("partition:%d, key:%s, offset:%d\n", record.partition(), record.key(), record.offset());
+//          i ++;
+//          if (i > 20) {
+//            TopicPartition topicPartition = new TopicPartition(record.topic(), record.partition());
+//            kafkaConsumer.pause(topicPartition);
+//          }
         }
+
 //        if(startingOffset == -2) {
 //          kafkaConsumer.commitSync();
 //        }

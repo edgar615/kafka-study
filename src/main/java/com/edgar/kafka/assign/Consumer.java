@@ -9,7 +9,7 @@ public class Consumer {
     CommitAssignRunnable runnable = new CommitAssignRunnable();
     runnable.setClientId("simple");
     runnable.setGroupId("test");
-    runnable.setKafkaConnect("10.4.7.48:9092");
+    runnable.setKafkaConnect("10.11.0.31:9092");
     runnable.setTopicName("topic-6");
     new Thread(runnable).start();
   }

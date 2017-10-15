@@ -3,10 +3,7 @@ package com.edgar.kafka.limit;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Created by edgar on 16-4-19.
@@ -69,15 +66,17 @@ public class ConsumerRunnable implements Runnable {
         Iterator<TopicPartition> topicPartitionIterator = partitions.iterator();
         while (topicPartitionIterator.hasNext()) {
           TopicPartition topicPartition = topicPartitionIterator.next();
+          List<TopicPartition> list = new ArrayList<>();
+          list.add(topicPartition);
           System.out.println("Current offset is " + kafkaConsumer.position(topicPartition) + " committed offset is ->" + kafkaConsumer.committed(topicPartition));
           if (startingOffset == -2) {
             System.out.println("Leaving it alone");
           } else if (startingOffset == 0) {
             System.out.println("Setting offset to begining");
-            kafkaConsumer.seekToBeginning(topicPartition);
+            kafkaConsumer.seekToBeginning(list);
           } else if (startingOffset == -1) {
             System.out.println("Setting offset to end");
-            kafkaConsumer.seekToEnd(topicPartition);
+            kafkaConsumer.seekToEnd(list);
           } else {
             System.out.println("Resetting offset to " + startingOffset);
             kafkaConsumer.seek(topicPartition, startingOffset);
